@@ -7,12 +7,14 @@
     "build": "node esbuild.config.mjs",
     "watch": "node esbuild.config.mjs --watch",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "sprites:optimize": "node scripts/optimize-sprites.mjs"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "esbuild": "^0.21.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.6.0",
-    "vitest": "^2.0.0",
-    "@types/node": "^20.0.0"
+    "vitest": "^2.0.0"
   }
 }
