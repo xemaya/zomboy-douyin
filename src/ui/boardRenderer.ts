@@ -31,12 +31,17 @@ export function drawBoard(state: State, highlight: Highlight[] = []): void {
   ctx.fillRect(0, 0, layout.baseWidth, layout.baseHeight);
 
   // 2) Tiles — terrain values: "empty" | "stone" | "house" | "start"
+  //    草地是统一地面层：每格先垫草地，再把 stone/house/start 物体叠上去
+  //    （这些物体 sprite 现在是透明背景，直接坐在草地上）。
   for (let r = 0; r < layout.rows; r++) {
     for (let c = 0; c < layout.cols; c++) {
       const { x, y } = cellToPixel(r, c);
       const tile = state.map.terrain[r][c];
-      const spriteKey = tileToSprite(tile);
-      ctx.drawImage(getSprite(spriteKey), x, y, layout.cellSize, layout.cellSize);
+      ctx.drawImage(getSprite('grass'), x, y, layout.cellSize, layout.cellSize);
+      // 仅 stone/house 是叠在草地上的物体；start 是逻辑起始格，按普通草地渲染
+      if (tile === 'stone' || tile === 'house') {
+        ctx.drawImage(getSprite(tileToSprite(tile)), x, y, layout.cellSize, layout.cellSize);
+      }
 
       // Grid line
       ctx.strokeStyle = colors.gridLine;
