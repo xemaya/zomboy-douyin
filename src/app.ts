@@ -17,7 +17,7 @@ import { drawLog } from './ui/log';
 import { hitButton } from './ui/modalBase';
 
 import { renderStartMenu, getStartMenuButtons, type StartMenuConfig } from './ui/startMenu';
-import { renderRulesModal, getRulesModalButtons } from './ui/rulesModal';
+import { renderRulesModal, getRulesModalButtons, scrollRulesModal } from './ui/rulesModal';
 import { renderCardModal, getCardModalButtons } from './ui/cardModal';
 import { renderEndScreen, getEndScreenButtons } from './ui/endScreen';
 
@@ -39,6 +39,9 @@ let state: State = newState();   // placeholder; replaced in startGame()
 let playerSide: Side = 'survivor';
 let gameStartTime: number = 0;
 let dirty = true;
+
+// Touch tracking for rules modal scrolling
+let _lastTouchY: number | null = null;
 
 // ─── computeHighlights ────────────────────────────────────────────────────
 
@@ -259,6 +262,9 @@ function handleTouch(evt: any): void {
   const px = t.clientX * (layout.baseWidth / width);
   const py = t.clientY * (layout.baseHeight / height);
 
+  // Track last touch Y for rules scrolling
+  _lastTouchY = py;
+
   switch (screen) {
     case 'menu':    return handleMenuTouch(px, py);
     case 'rules':   return handleRulesTouch(px, py);
@@ -298,7 +304,27 @@ export async function boot(): Promise<void> {
   //    for multi-screen routing; we need raw touch events here)
   tt.onTouchStart(handleTouch);
 
-  // 7. Start at menu screen
+  // 7. Rules modal scrolling via touch drag
+  tt.onTouchMove?.((evt: any) => {
+    if (screen !== 'rules') return;
+    const t = evt.touches?.[0] ?? evt.changedTouches?.[0];
+    if (!t) return;
+    const { width, height } = getScreen();
+    const py = t.clientY * (layout.baseHeight / height);
+    if (_lastTouchY !== null) {
+      const delta = _lastTouchY - py;  // dragging up = scroll down (positive delta)
+      if (Math.abs(delta) > 2) {
+        scrollRulesModal(delta);
+        dirty = true;
+      }
+    }
+    _lastTouchY = py;
+  });
+
+  tt.onTouchEnd?.(() => { _lastTouchY = null; });
+  tt.onTouchCancel?.(() => { _lastTouchY = null; });
+
+  // 8. Start at menu screen
   screen = 'menu';
   dirty = true;
   renderLoop();

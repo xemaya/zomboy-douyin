@@ -18,7 +18,7 @@ export async function login(): Promise<UserInfo> {
       success: (res: any) => {
         // 真实生产要把 res.code 发到自己的后端换 openid。
         // Stage 1B 没有后端，直接 fabricate 一个本地 ID + cache。
-        _userInfo = { openid: 'local-' + res.code.substring(0, 8) };
+        _userInfo = { openid: 'local-' + String(res.code ?? '').substring(0, 8) };
         resolve(_userInfo);
       },
       fail: (e: any) => reject(new Error('tt.login failed: ' + JSON.stringify(e)))
