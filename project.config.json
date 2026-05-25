@@ -1,0 +1,12 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "zomboy-douyin",
+  "description": "ZOM-BOY+ 抖音小游戏版 - Stage 1A",
+  "appid": "tt-placeholder-replace-when-registered",
+  "setting": {
+    "es6": false,
+    "minified": false,
+    "urlCheck": false
+  },
+  "compileType": "game"
+}
