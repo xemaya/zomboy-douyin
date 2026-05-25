@@ -32,12 +32,14 @@ declare global {
     textAlign: 'left' | 'right' | 'center' | 'start' | 'end';
     textBaseline: 'top' | 'middle' | 'bottom' | 'alphabetic' | 'hanging' | 'ideographic';
     imageSmoothingEnabled: boolean;
+    globalAlpha: number;
     fillRect(x: number, y: number, w: number, h: number): void;
     strokeRect(x: number, y: number, w: number, h: number): void;
     drawImage(image: any, dx: number, dy: number, dw?: number, dh?: number): void;
     fillText(text: string, x: number, y: number): void;
     scale(x: number, y: number): void;
     clearRect(x: number, y: number, w: number, h: number): void;
+    measureText(text: string): { width: number };
   }
   interface CanvasGradient {}
   interface CanvasPattern {}
