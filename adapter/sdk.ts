@@ -36,7 +36,7 @@ export interface ShareOptions {
 export function shareAppMessage(opts: ShareOptions = {}): void {
   try {
     tt.shareAppMessage({
-      title: opts.title ?? '来玩我刚通关的僵尸棋！',
+      title: opts.title ?? '来一局僵尸跳棋，看你能跳杀几只！',
       imageUrl: opts.imageUrl ?? '',
       templateId: opts.templateId ?? '',
       query: opts.query ?? '',

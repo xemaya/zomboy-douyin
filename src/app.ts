@@ -242,7 +242,7 @@ function handleEndTouch(px: number, py: number): void {
     return;
   }
   if (hitButton([btns.share], px, py) === 0) {
-    const verb = playerWon ? '我刚通关了僵尸棋！' : '差一点就赢了，来挑战一下？';
+    const verb = playerWon ? '我刚赢了一局僵尸跳棋！' : '差一点就赢了，来挑战一下？';
     shareAppMessage({ title: verb });
     return;
   }

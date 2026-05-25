@@ -5,9 +5,9 @@ import { drawModalBackdrop, drawModalButton, type ModalButton } from './modalBas
 
 const RULES_TEXT = [
   { h: '🎮 30 秒上手', items: [
-    '两个人轮流坐一起玩：一边管 4 个蓝色小人（守人类），一边管 僵尸大军。',
-    '谁先拿到 4 分谁赢。守人靠 打飞僵尸 加分，僵尸靠 拐走小人 加分。',
-    '好玩在两边节奏完全不一样——人能斜着走、还会跳过去打飞；僵尸只能直走，但能无限增兵。'
+    '双方轮流出手：一边管 4 个蓝色小人（守人类），一边管 僵尸大军。',
+    '谁先拿到 4 分谁赢。守人靠 跳杀僵尸 得分，僵尸靠 感染小人 得分。',
+    '好玩在两边节奏完全不一样——人能斜着走、还会跳过去跳杀；僵尸只能直走，但能无限增兵。'
   ]},
   { h: '🏃 人类怎么玩', items: [
     '每回合挑 1 个小人走 1 格，上下左右、斜着走都行。',
@@ -20,8 +20,8 @@ const RULES_TEXT = [
     '② 进军：移动 2 步——可以让同 1 只僵尸走两次，也可以两只各走一次。',
     '僵尸只能上下左右走，不能斜走。9 只放完后就不能再增兵。'
   ]},
-  { h: '⭐ 小心被拐走', items: [
-    '每回合一结束就结算：如果某个小人上下左右紧贴 2 只或更多僵尸，他当场被拐走。',
+  { h: '⚠️ 小心被感染', items: [
+    '每回合一结束就结算：如果某个小人上下左右紧贴 2 只或更多僵尸，他当场被感染。',
     '小人没了，僵尸 +1 分；要是库存还有僵尸，原地立刻再冒一只补位。'
   ]},
   { h: '🎁 房子里有惊喜', items: [
@@ -55,7 +55,7 @@ export function renderRulesModal(): void {
   ctx.fillStyle = colors.cream;
   ctx.font = 'bold 40px "PingFang SC", "Microsoft YaHei", sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText('🎮 ZOM-BOY+ 规则', 30, 65);
+  ctx.fillText('🎮 僵尸跳棋 · 规则', 30, 65);
 
   // Close button
   const btns = getRulesModalButtons();
@@ -63,6 +63,10 @@ export function renderRulesModal(): void {
 
   // Body
   ctx.fillStyle = colors.gbDarkGreen;
+  // drawModalButton 把 textAlign 改成了 center 且未复位，这里必须重置为左对齐，
+  // 否则正文会以 x=30 为中心绘制、左半溢出屏外被裁。
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
   let y = 150 - _scrollY;
   for (const sec of RULES_TEXT) {
     ctx.font = 'bold 28px "PingFang SC", "Microsoft YaHei", sans-serif';

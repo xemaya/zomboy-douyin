@@ -45,7 +45,7 @@ export function renderEndScreen(state: State, playerSide: 'survivor' | 'zombie',
   ctx.font = '26px "PingFang SC", "Microsoft YaHei", sans-serif';
   ctx.textAlign = 'center';
 
-  ctx.fillText(`击退 ⭐ ${state.survivorKills}  |  拐走 👻 ${state.zombieKills}`, layout.baseWidth / 2, 380);
+  ctx.fillText(`跳杀 ⭐ ${state.survivorKills}  |  感染 🧟 ${state.zombieKills}`, layout.baseWidth / 2, 380);
   ctx.fillText(`回合数：${stats.turns}   用时：${stats.durationSec} 秒`, layout.baseWidth / 2, 430);
 
   ctx.fillStyle = colors.pink;

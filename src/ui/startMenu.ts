@@ -28,7 +28,7 @@ export interface StartMenuButtons {
 export function getStartMenuButtons(): StartMenuButtons {
   return {
     modePve:     { label: '单人',  rect: { x: 60,   y: 320, w: 290, h: 80 } },
-    modePvp:     { label: '热座',  rect: { x: 400,  y: 320, w: 290, h: 80 } },
+    modePvp:     { label: '双人同屏',  rect: { x: 400,  y: 320, w: 290, h: 80 } },
     diffEasy:    { label: '轻松',  rect: { x: 60,   y: 460, w: 195, h: 70 } },
     diffMed:     { label: '普通',  rect: { x: 277,  y: 460, w: 195, h: 70 } },
     diffHard:    { label: '挑战',  rect: { x: 494,  y: 460, w: 195, h: 70 } },
@@ -47,10 +47,10 @@ export function renderStartMenu(cfg: StartMenuConfig): void {
   ctx.fillStyle = colors.cream;
   ctx.font = 'bold 64px "PingFang SC", "Microsoft YaHei", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('末日 4 对 4', layout.baseWidth / 2, 150);
+  ctx.fillText('僵尸跳棋', layout.baseWidth / 2, 150);
   ctx.font = 'bold 40px "PingFang SC", "Microsoft YaHei", sans-serif';
   ctx.fillStyle = colors.pink;
-  ctx.fillText('僵尸来袭', layout.baseWidth / 2, 220);
+  ctx.fillText('末日生存对战', layout.baseWidth / 2, 220);
 
   // Section labels
   ctx.fillStyle = colors.cream;
