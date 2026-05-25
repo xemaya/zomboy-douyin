@@ -8,6 +8,9 @@
     "watch": "node esbuild.config.mjs --watch",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "local:build": "node local/esbuild.local.mjs",
+    "local:watch": "node local/esbuild.local.mjs --watch",
+    "local:serve": "python3 -m http.server 8848 --bind 127.0.0.1",
     "sprites:optimize": "node scripts/optimize-sprites.mjs"
   },
   "devDependencies": {

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- base=/ 使运行时 sprite 路径 assets/sprites/*.png 解析到服务器根目录 -->
+  <base href="/" />
+  <title>ZOM-BOY+ 本地运行</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #1a1a1a; }
+    #app { display: flex; justify-content: center; align-items: flex-start; padding: 8px; }
+    canvas { box-shadow: 0 0 24px rgba(0,0,0,.6); }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="local/dist/game.local.js"></script>
+</body>
+</html>

@@ -1,5 +1,8 @@
 node_modules/
 dist/
+local/dist/
+.playwright-mcp/
+/zomboy-*.png
 .DS_Store
 *.log
 *.local
